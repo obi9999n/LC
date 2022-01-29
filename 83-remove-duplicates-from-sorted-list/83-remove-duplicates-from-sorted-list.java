@@ -11,22 +11,22 @@
 class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         if (head == null) return null;
+        // edge case for empty LL
         
-        ListNode p1 = head;
-        while(p1.next != null){
-            ListNode nn = p1.next;
-            while(nn != null && nn.val == p1.val){
-                nn = nn.next;
+        ListNode curr = head;
+        while(curr.next != null){
+            ListNode nextNode = curr.next;
+            while(nextNode != null && nextNode.val == curr.val){
+                nextNode = nextNode.next;
             }
-            if (nn == null){
-                p1.next = null;
+            if (nextNode == null){
+                curr.next = null;
                 return head;
             }
-            p1.next = nn;
-            p1 = nn;
+            curr.next = nextNode;
+            curr = nextNode;
         }
-        
-        return head;
-        
+        curr.next = null;
+        return head; 
     }
 }
