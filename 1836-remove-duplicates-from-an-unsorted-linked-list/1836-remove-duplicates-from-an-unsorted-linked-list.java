@@ -10,30 +10,23 @@
  */
 class Solution {
     public ListNode deleteDuplicatesUnsorted(ListNode head) {
-        Set<Integer> set = new HashSet<>();
-        Set<Integer> list = new LinkedHashSet<>();
-        ListNode result = new ListNode();
-        
-        while(head != null){
-            
-            if(set.contains(head.val)){
-                list.remove(head.val);
-            } else{
-                list.add(head.val);
-                set.add(head.val);
+        ListNode sentinel = new ListNode(-1, head);
+        ListNode cur = head;
+        ListNode pre = sentinel;
+        Map<Integer, Integer> map = new HashMap<>();
+        while (cur != null) {
+            map.put(cur.val, map.getOrDefault(cur.val, 0) + 1);
+            cur = cur.next;
+        }
+        cur = head;
+        while (cur != null) {
+            if (map.get(cur.val) > 1) {
+                pre.next = cur.next;
+            } else {
+                pre = pre.next;
             }
-            
-            head = head.next;
+            cur = cur.next;
         }
-        
-        head = new ListNode();
-        ListNode temp = head;
-        
-        for (int val : list) {
-            temp.next = new ListNode(val);
-            temp = temp.next;
-        }
-        
-        return head.next;
+        return sentinel.next;
     }
 }
