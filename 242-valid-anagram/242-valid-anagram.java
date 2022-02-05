@@ -1,28 +1,21 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
-        if(s.length() != t.length()) return false;
+        HashMap<Character,Integer> map = new HashMap<Character,Integer>();
         
-        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
-        
-        for(char ch: s.toCharArray()){
-            map.put(ch, map.getOrDefault(ch, 0) + 1);
+        for(char c: s.toCharArray()){
+            map.put(c, map.getOrDefault(c, 0) + 1);
         }
         
-        for(int i = 0; i < t.length(); i++){
-            char c = t.charAt(i);
-            if (map.containsKey(c)){
-                if (map.get(c) == 1){
-                    map.remove(c);
-                } else {
-                    map.put(c, map.getOrDefault(c,0) - 1);
-                }
+        for(char ch: t.toCharArray()){
+            if (map.containsKey(ch) == false) return false;
+            if (map.get(ch) == 1){
+                map.remove(ch);
             } else {
-                return false;
+                map.put(ch, map.get(ch) - 1);
             }
         }
         
         return map.isEmpty();
-        
         
     }
 }
