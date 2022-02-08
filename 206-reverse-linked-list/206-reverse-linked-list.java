@@ -11,11 +11,9 @@
 class Solution {
     public ListNode reverseList(ListNode head) {
         if (head == null) return null;
-        //edge case
         
         ListNode prev = null;
         ListNode curr = head;
-        //initializing curr and prev pointer
         
         while(curr.next != null){
             ListNode nn = curr.next;
@@ -23,9 +21,9 @@ class Solution {
             prev = curr;
             curr = nn;
         }
-        
         curr.next = prev;
         head = curr;
-        return head;    
+        return head;
+        
     }
 }
