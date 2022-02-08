@@ -1,5 +1,9 @@
 class Solution {
     public int maxSubArray(int[] nums) {
+        if (nums.length == 1){
+            return nums[0];
+        }
+        
         int currentSubarray = nums[0];
         int maxSubarray = nums[0];
         
@@ -7,7 +11,7 @@ class Solution {
             int num = nums[i];
             
             currentSubarray = Math.max(num, currentSubarray + num);
-            maxSubarray = Math.max(currentSubarray, maxSubarray);
+            maxSubarray = Math.max(maxSubarray, currentSubarray);
         }
         
         return maxSubarray;
