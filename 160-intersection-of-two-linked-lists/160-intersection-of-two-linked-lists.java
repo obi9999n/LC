@@ -11,56 +11,47 @@
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        //get length of both linked list
-        
+        //find lengths of a list and b list
         int lengthA = 0;
         int lengthB = 0;
         
-        ListNode currA = headA;
-        while (currA != null){
+        ListNode curr = headA;
+        while(curr != null){
             lengthA++;
-            currA = currA.next;
+            curr = curr.next;
         }
-        
-        ListNode currB = headB;
-        while (currB != null){
+        curr = headB;
+        while(curr != null){
             lengthB++;
-            currB = currB.next;
+            curr = curr.next;
         }
         
-        //get index
-        int stopIndex = 0;
-        int i = 0;
+        
+        int diff;
+        ListNode currA = headA;
+        ListNode currB = headB;
+        
         if (lengthA < lengthB){
-            stopIndex = lengthB - lengthA;
-            currB = headB;
-            currA = headA;
-            while(i < stopIndex){
+            diff = lengthB - lengthA;
+            while(diff > 0){
                 currB = currB.next;
-                i++;
+                diff--;
             }
         } else if (lengthB < lengthA){
-            stopIndex = lengthA - lengthB;
-            currB = headB;
-            currA = headA;
-            while(i < stopIndex){
+            diff = lengthA - lengthB;
+            while(diff > 0){
                 currA = currA.next;
-                i++;
+                diff--;
             }
-        } else {
-            currB = headB;
-            currA = headA;   
         }
         
-        //find intersect
         while(currA != null && currB != null){
-            if (currA == currB){
-                return currA;
-            }
+            if(currA == currB) return currB;
             currA = currA.next;
             currB = currB.next;
         }
         
         return null;
+        
     }
 }
