@@ -1,11 +1,11 @@
 class Solution {
     public String toLowerCase(String s) {
-        StringBuilder sb = new StringBuilder(s);
+        String newString = "";
         
         for(int i = 0; i < s.length(); i++){
-            sb.setCharAt(i, Character.toLowerCase(sb.charAt(i)));
+            newString = newString + Character.toString(Character.toLowerCase(s.charAt(i)));
         }
         
-        return sb.toString();
+        return newString;
     }
 }
