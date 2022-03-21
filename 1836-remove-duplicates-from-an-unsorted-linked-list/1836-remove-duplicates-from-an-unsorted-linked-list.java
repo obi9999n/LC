@@ -10,39 +10,34 @@
  */
 class Solution {
     public ListNode deleteDuplicatesUnsorted(ListNode head) {
+        //edge case for 1 element 
+        if (head.next == null) return head;
         
-        if (head.next == null){
-            return head;
-        }
-        //edge case
-        
-        ListNode dummy = new ListNode(0);
-        ListNode prev = dummy;
+        //iterate LL and put elements in map
+        HashMap<Integer, Integer> map = new HashMap<>();
         ListNode curr = head;
-        dummy.next = head;
-        
-        
-        //find frecuency of numbers
-        HashMap<Integer,Integer> map = new HashMap<Integer,Integer>();
         while(curr != null){
             map.put(curr.val, map.getOrDefault(curr.val, 0) + 1);
             curr = curr.next;
         }
         
-        //re init curr to head 
+        //dummy node just in case first element needs deletion
+        ListNode dummy = new ListNode(0);
+        ListNode prev = dummy;
+        
         curr = head;
         while(curr != null){
-            int frecuency = map.get(curr.val);
-            if(frecuency > 1){
-                prev.next = curr.next;
+            if(map.get(curr.val) == 1){
+                prev.next = curr;
+                prev = prev.next;
+                curr = curr.next;
             } else {
-                prev = curr;
-                
+                curr = curr.next;
             }
-            curr = curr.next;
         }
-
-        return dummy.next;
+        ListNode nullNode = null;
+        prev.next = nullNode;
         
+        return dummy.next;
     }
 }
