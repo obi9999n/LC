@@ -1,34 +1,31 @@
 class Solution {
     public boolean isValid(String s) {
-        if (s.length() == 1){
-            return false;
-        }
-        //edge case
+        Stack<Character> stack = new Stack<>();
+        HashMap<Character, Character> map = new HashMap<>();
         
-        HashMap<Character,Character> map = new HashMap<Character,Character>();
-        Stack<Character> stack = new Stack<Character>();
+        //put three types of parentheses pairs in map
         map.put('(', ')');
         map.put('[', ']');
         map.put('{', '}');
         
-        for (int i = 0; i < s.length(); i++){
+        //iterate through string 
+        for(int i = 0; i < s.length(); i++){
             char c = s.charAt(i);
             char top;
             if (map.containsKey(c)){
-                stack.push(c);
-            } else if (stack.isEmpty()){
-                    return false;   
+                stack.push(c);   
+            } else if (stack.isEmpty() && map.containsKey(c) == false){
+                return false;    
             } else {
-                top = stack.peek();
-                if (map.get(top) == c){
-                    stack.pop();
-                } else {
+                top = stack.pop();
+                if (map.get(top) != c){
                     return false;
                 }
             }
         }
+
+
         
         return stack.isEmpty();
-        
     }
 }
