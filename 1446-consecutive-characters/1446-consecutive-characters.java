@@ -19,7 +19,7 @@ class Solution {
                 currPow++;
             } else {
                 maxPow = Math.max(maxPow, currPow);
-                map.clear();
+                map.remove(s.charAt(i));
                 i = j;
                 map.put(s.charAt(i), 1);
                 currPow = 1;
