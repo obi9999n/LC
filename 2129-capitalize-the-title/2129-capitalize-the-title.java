@@ -20,9 +20,6 @@ class Solution {
                 j = i;
             }
         }
-        System.out.println(arr[i]);
-        System.out.println(currLen);
-
         //last word in arr
         if (currLen > 2){
             arr[i] = Character.toUpperCase(arr[i]);
