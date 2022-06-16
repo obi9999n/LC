@@ -10,30 +10,32 @@
  */
 class Solution {
     public ListNode removeElements(ListNode head, int val) {
-        //edge case
-        if (head == null) return null;
+        //if no elements in LL
+        if(head == null) return null;
         
-        ListNode dummy = new ListNode(0);
-        ListNode prev = dummy;
+        //create dummy node to easily keep track of previous node at start
+        ListNode sentinel = new ListNode(0);
+        ListNode prev = sentinel;
         ListNode curr = head;
         
         while(curr != null){
-           if (curr.val == val && curr.next != null){
-               while(curr != null && curr.val == val){
-                   curr = curr.next;
-                   
-               }
-           } else if(curr.val == val && curr.next == null){   //edge case for when last element is val
-               prev.next = null;
-               break;
-           }
-           prev.next = curr;
-           prev = prev.next;
-            if(curr != null){
-                curr = curr.next;  
-            }     
+            ListNode tmp = curr.next;
+            
+            //if curr = val loop till tmp is not val
+            if(curr.val == val){
+                while(tmp != null && tmp.val == val){
+                    tmp = tmp.next;
+                }
+                prev.next = tmp;
+                curr = tmp;
+            } else {
+                prev.next = curr;
+                prev = curr;
+                curr = tmp;
+            }
         }
         
-        return dummy.next;
+        return sentinel.next;
+        
     }
 }
