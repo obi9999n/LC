@@ -1,43 +1,30 @@
 class Solution {
     public int maxVowels(String s, int k) {
-        //vowel map
-        HashMap<Character, Character> map = new HashMap<>();
         
-        map.put('a','a');
-        map.put('e','e');
-        map.put('i','i');
-        map.put('o','o');
-        map.put('u','u');
+        Set<Character> set = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
 
-        //two ptr sliding window solution
+        // two pointer 
         int i = 0;
         int j = 0;
-        int currVow = 0;
-        int maxVow = 0;
+        int currMax = 0;
+        int max = 0;
         
-        
-        while(j < s.length()){
+        //sliding window where we calculate max vowels as we go
+        while (j < s.length()){
             if(j < k){
-                //check if char at j is vowel
-                if(map.containsKey(s.charAt(j))) currVow++;
-                //increment j till k is reached
-                j++;
+               if(set.contains(s.charAt(j))) currMax++; 
+               j++; 
             } else {
-                //max substring length reached
-                maxVow = Math.max(currVow, maxVow);
-                
-                if(map.containsKey(s.charAt(i))) {
-                    currVow--;
-                }
+                //calculate max with currMax
+                max = Math.max(max, currMax);
+                if(set.contains(s.charAt(j))) currMax++;
+                if(set.contains(s.charAt(i))) currMax--;
                 i++;
-                if(map.containsKey(s.charAt(j))) {
-                    currVow++;
-                }
-                j++;  
+                j++;
             }
         }
-        
-        maxVow = Math.max(currVow, maxVow);
-        return maxVow;
+        max = Math.max(max, currMax);
+
+        return max;
     }
 }
