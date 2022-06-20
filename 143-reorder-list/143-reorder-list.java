@@ -10,37 +10,38 @@
  */
 class Solution {
     public void reorderList(ListNode head) {
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        ListNode p1 = head;
         
+        //find half way point fast & slow pointer
+        ListNode s = head;
+        ListNode f = head;
         
-        while(p1 != null){
-            list.add(p1.val);
-            p1 = p1.next;
+        while(f != null && f.next != null){
+            f = f.next.next;
+            s = s.next;
         }
+        //reverse second half of list
+        ListNode x = null;
+        ListNode prev = x;
         
-        int i = 1;
-        int j = list.size() - 1;
-        p1 = head.next;
-        if (list.size() % 2 == 0){
-            while(i < j){
-                p1.val = list.get(j);
-                p1 = p1.next;
-                p1.val = list.get(i);
-                p1 = p1.next;
-                j--;
-                i++;
-            }  
-            p1.val = list.get(i);    
-        } else {
-            while(i < j){
-                p1.val = list.get(j);
-                p1 = p1.next;
-                p1.val = list.get(i);
-                p1 = p1.next;
-                j--;
-                i++;
-            }   
-        } 
+        while(s != null){
+            ListNode nn = s.next;
+            s.next = prev;
+            prev = s;
+            s = nn;
+        }
+        //s is at start of reversed list
+        s = prev;
+        //f is at head
+        f = head;
+        
+        while(s.next != null){
+            ListNode fNew = f.next;
+            ListNode sNew = s.next;
+            f.next = s;
+            s.next = fNew;
+            f = fNew;
+            s = sNew;
+        }
+            
     }
 }
