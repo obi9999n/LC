@@ -15,21 +15,17 @@
  */
 class Solution {
     public boolean isUnivalTree(TreeNode root) {
-        int value = root.val;
-        
-        return helper(root, value);
-    
+        if (root == null) return true;
+        int val = root.val;
+        return helper(root, val);
     }
     
-    public boolean helper(TreeNode root, int val){
-        if(root == null) {
-            return true;
-        }
-        if(root.val != val){
-            return false;
-        }
+    public boolean helper(TreeNode node, int value){
+        if (node == null) return true;
+        if(node.val != value) return false;
         
-        return helper(root.left, val) && helper(root.right, val);
+        return helper(node.left, value) && helper(node.right, value);
     }
+    
     
 }
