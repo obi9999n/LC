@@ -18,8 +18,7 @@ class Solution {
     public int sumOfLeftLeaves(TreeNode root) {
         if(root == null) return 0;
         
-        int ans = helper(root, 0, false);
-        return ans;
+        return helper(root, 0, false);
     }
     
     //helper to add to left sum
