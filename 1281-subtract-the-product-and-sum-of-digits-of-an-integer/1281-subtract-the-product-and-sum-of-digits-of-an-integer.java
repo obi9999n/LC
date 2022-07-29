@@ -1,18 +1,17 @@
 class Solution {
     public int subtractProductAndSum(int n) {
-        //edge case
-        if(n <= 9) return 0;
-                
         int product = 1;
         int sum = 0;
+        int num = n;
         
-        while(n >= 1){
-            int remainder = n % 10;
-            product = product * remainder;
-            sum = sum + remainder;
-            n = n / 10;
+        //while loop to determine product and sum of digits
+        while(num > 0){
+            product = product * (num % 10);
+            sum = sum + (num % 10);
+            num = num / 10;
         }
         
+        //return difference
         return product - sum;
     }
 }
