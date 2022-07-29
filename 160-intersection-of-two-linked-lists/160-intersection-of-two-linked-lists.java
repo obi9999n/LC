@@ -11,47 +11,51 @@
  */
 public class Solution {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-        //find lengths of a list and b list
+        
         int lengthA = 0;
         int lengthB = 0;
         
-        ListNode curr = headA;
-        while(curr != null){
-            lengthA++;
-            curr = curr.next;
-        }
-        curr = headB;
-        while(curr != null){
-            lengthB++;
-            curr = curr.next;
-        }
-        
-        
-        int diff;
+        //calculate list a length
         ListNode currA = headA;
-        ListNode currB = headB;
+        while(currA != null) {
+            lengthA++;
+            currA = currA.next;
+        }
         
-        if (lengthA < lengthB){
-            diff = lengthB - lengthA;
-            while(diff > 0){
-                currB = currB.next;
-                diff--;
-            }
-        } else if (lengthB < lengthA){
-            diff = lengthA - lengthB;
-            while(diff > 0){
+        //calculate list b length
+        ListNode currB = headB;
+        while(currB != null) {
+            lengthB++;
+            currB = currB.next;
+        }
+        currA = headA;
+        currB = headB;
+        
+        int difference = 0;
+        //if a length > b length, move curr a up by the difference, else opposite
+        if(lengthA > lengthB){
+            difference = lengthA - lengthB;
+            while(difference > 0){
                 currA = currA.next;
-                diff--;
+                difference--;
+            }
+        }
+        if(lengthB > lengthA){
+            difference = lengthB - lengthA;
+            while(difference > 0){
+                currB = currB.next;
+                difference--;
             }
         }
         
-        while(currA != null && currB != null){
-            if(currA == currB) return currB;
+        
+        //in while loop, check if curr a = curr b
+        while(currA != null){
+            if(currA == currB) return currA;
+            
             currA = currA.next;
             currB = currB.next;
         }
-        
         return null;
-        
     }
 }
