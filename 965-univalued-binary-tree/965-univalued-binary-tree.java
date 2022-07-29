@@ -16,15 +16,15 @@
 class Solution {
     public boolean isUnivalTree(TreeNode root) {
         if (root == null) return true;
-        return helper(root, root.val);
-    }
-    
-    public boolean helper(TreeNode node, int value){
-        if (node == null) return true;
-        if(node.val != value) return false;
         
-        return helper(node.left, value) && helper(node.right, value);
+        return validate(root, root.val);
+        
     }
     
-    
+    public boolean validate(TreeNode node, int val) {
+        if (node == null) return true;
+        if (node.val != val) return false;
+        
+        return validate(node.left, val) && validate(node.right, val);
+    }
 }
