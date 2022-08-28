@@ -1,26 +1,23 @@
 class Solution {
     public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<Character>();
         
-        //map containing pairs of parentheses for lookup
-        Map<Character, Character> map = new HashMap<>();
+        //map to store pairs of the 3 types of parentheses
+        Map<Character, Character> map = new HashMap<Character, Character>();
         map.put('(', ')');
         map.put('[', ']');
         map.put('{', '}');
         
-        //create stack
-        Stack<Character> stack = new Stack<Character>();
-        
-        //loop through string
+        //while loop to analyze input string
         int i = 0;
         while(i < s.length()){
             if(map.containsKey(s.charAt(i))){
                 stack.push(s.charAt(i));
-            } else if(map.containsKey(s.charAt(i)) == false && stack.isEmpty() == false){
-                //check if parentheses match, if no match, return false
-                if(map.get(stack.peek()) != s.charAt(i)){
-                    return false;
-                } else {
+            } else if (stack.isEmpty() == false && map.containsKey(s.charAt(i)) == false){
+                if(map.get(stack.peek()) == s.charAt(i)){
                     stack.pop();
+                } else {
+                    return false;
                 }
             } else {
                 return false;
@@ -29,5 +26,6 @@ class Solution {
         }
 
         return stack.isEmpty();
+        
     }
 }
