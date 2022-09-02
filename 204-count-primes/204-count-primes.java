@@ -7,7 +7,7 @@ class Solution {
         
         boolean[] arr = new boolean[n];
         
-        for(int i = 2; i <= (int) Math.sqrt(n); ++i){
+        for(int i = 2; i <= (int) Math.sqrt(n); i++){
             if(arr[i] == false){
                 for(int j = i*i; j < n; j += i){
                     arr[j] = true;
